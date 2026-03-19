@@ -28,9 +28,17 @@ import com.example.util.Utils;
 
 public class BasePage {
 
-	protected WebDriver driver = Hooks.getDriver();
-	protected ExtentTest extentTest = Hooks.getExtentTest();
-	protected ExtentReports extentReport = Hooks.getExtentReports();
+	protected WebDriver driver() {
+		return Hooks.getDriver();
+	}
+
+	protected ExtentTest extentTest() {
+		return Hooks.getExtentTest();
+	}
+
+	protected ExtentReports extentReport() {
+		return Hooks.getExtentReports();
+	}
 
 	public BasePage() {
 
@@ -53,7 +61,7 @@ public class BasePage {
 	}
 
 	protected WebElement waitElement(By by, int timeOutInSeconds) {
-		Wait<WebDriver> wait = new FluentWait<>(driver)
+		Wait<WebDriver> wait = new FluentWait<>(driver())
 				.withTimeout(Duration.ofSeconds(timeOutInSeconds))
 				.pollingEvery(Duration.ofMillis(200))
 				.ignoring(NoSuchElementException.class)
@@ -63,7 +71,7 @@ public class BasePage {
 	}
 
 	protected WebElement waitElement(WebElement webElement, int timeOutInSeconds) {
-		Wait<WebDriver> wait = new FluentWait<>(driver)
+		Wait<WebDriver> wait = new FluentWait<>(driver())
 				.withTimeout(Duration.ofSeconds(timeOutInSeconds))
 				.pollingEvery(Duration.ofMillis(10))
 				.ignoring(NoSuchElementException.class)
@@ -74,7 +82,7 @@ public class BasePage {
 	}
 
 	protected List<WebElement> waitElements(By by, int timeOutInSeconds) {
-		Wait<WebDriver> wait = new FluentWait<>(driver)
+		Wait<WebDriver> wait = new FluentWait<>(driver())
 				.withTimeout(Duration.ofSeconds(timeOutInSeconds))
 				.pollingEvery(Duration.ofMillis(10))
 				.ignoring(NoSuchElementException.class)
@@ -84,7 +92,7 @@ public class BasePage {
 	}
 
 	protected boolean waitNotPresent(By by, int timeOutInSeconds) {
-		Wait<WebDriver> wait = new FluentWait<>(driver)
+		Wait<WebDriver> wait = new FluentWait<>(driver())
 				.withTimeout(Duration.ofSeconds(timeOutInSeconds))
 				.pollingEvery(Duration.ofMillis(100))
 				.ignoring(NoSuchElementException.class)
@@ -103,7 +111,7 @@ public class BasePage {
 		boolean isElementhasText = false;
 		try {
 			waitMilliseconds(500);
-			Wait<WebDriver> wait = new FluentWait<>(driver)
+			Wait<WebDriver> wait = new FluentWait<>(driver())
 					.withTimeout(Duration.ofSeconds(1))
 					.pollingEvery(Duration.ofMillis(200))
 					.ignoring(NoSuchElementException.class)
@@ -116,16 +124,16 @@ public class BasePage {
 	}
 
 	protected void moveToElement(WebElement element) {
-		Actions action = new Actions(driver);
+		Actions action = new Actions(driver());
 		action.moveToElement(element).build().perform();
 	}
 
 	protected boolean isElementDisplayed(By by) {
 		boolean isElementPresent = false;
 		boolean isElementDisplayed = false;
-		isElementPresent = !driver.findElements(by).isEmpty();
+		isElementPresent = !driver().findElements(by).isEmpty();
 		if (isElementPresent) {
-			isElementDisplayed = driver.findElement(by).isDisplayed();
+			isElementDisplayed = driver().findElement(by).isDisplayed();
 		}
 		return isElementPresent && isElementDisplayed;
 	}
@@ -151,7 +159,7 @@ public class BasePage {
 		String screenShotName = datahora + ".png";
 		File scrFile = null;
 		try {
-			scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			scrFile = ((TakesScreenshot) driver()).getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(scrFile, new File("target/report/html/img/" + screenShotName));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -161,32 +169,32 @@ public class BasePage {
 
 	protected void log(String log) {
 		String screenShotName = saveScreenshotInRelatoriosPath();
-		extentTest.pass(log, MediaEntityBuilder.createScreenCaptureFromPath("img/" + screenShotName).build());
+		extentTest().pass(log, MediaEntityBuilder.createScreenCaptureFromPath("img/" + screenShotName).build());
 	}
 
 	public void logPrintFail(String log) {
 		String screenShotName = saveScreenshotInRelatoriosPath();
-		extentTest.fail(log, MediaEntityBuilder.createScreenCaptureFromPath("img/" + screenShotName).build());
+		extentTest().fail(log, MediaEntityBuilder.createScreenCaptureFromPath("img/" + screenShotName).build());
 	}
 
 	protected void logInfo(String log) {
-		extentTest.info(log);
+		extentTest().info(log);
 	}
 
 	protected void logSkip(String log) {
-		extentTest.skip(log);
+		extentTest().skip(log);
 	}
 
 	protected void logFail(String log) {
-		extentTest.fail(log);
+		extentTest().fail(log);
 	}
 
 	protected void logError(String log) {
-		extentTest.fail("[ERROR]" + log);
+		extentTest().fail("[ERROR]" + log);
 	}
 
 	protected void logPass(String log) {
-		extentTest.pass(log);
+		extentTest().pass(log);
 	}
 
 	protected ExtentTest createChildStart(String strNomeTeste) {

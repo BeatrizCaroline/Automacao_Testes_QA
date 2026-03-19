@@ -15,11 +15,9 @@ public class HomePage extends BasePage {
     @FindBy(css = "[data-test='search-submit']")
     protected WebElement botaoLupaBuscar;
 
-    public HomePage() {
-        PageFactory.initElements(new AjaxElementLocatorFactory(Hooks.getDriver(), 10), this);
-    }
-
     public void pesquisarProduto(String nomeProduto) {
+        PageFactory.initElements(
+                new AjaxElementLocatorFactory(Hooks.getDriver(), 10), this);
         campoBusca.sendKeys(nomeProduto);
         botaoLupaBuscar.click();
         log("Pesquisou pelo produto: " + nomeProduto);

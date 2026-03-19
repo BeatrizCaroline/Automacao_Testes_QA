@@ -2,8 +2,6 @@ package com.example.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -12,10 +10,6 @@ import com.example.util.Hooks;
 import java.time.Duration;
 
 public class CarrinhoPage extends BasePage {
-
-    public CarrinhoPage() {
-        PageFactory.initElements(new AjaxElementLocatorFactory(Hooks.getDriver(), 10), this);
-    }
 
     public boolean apresentouProdutoEsperadoNoCarrinho(String nomeProduto) {
         try {

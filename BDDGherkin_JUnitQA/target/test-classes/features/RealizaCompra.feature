@@ -1,7 +1,7 @@
 #language: pt
 #encoding: utf-8
 
-@test
+@Test
 Funcionalidade: Realizar Compra no E-commerce
 
 	Como um comprador
@@ -21,4 +21,3 @@ Funcionalidade: Realizar Compra no E-commerce
 	E aumenta a quantidade para "2"
 	Quando adiciona o produto "Pliers" ao carrinho
 	Entao o produto  "Pliers" deve possuir a quantidade "2" no carrinho
-

@@ -17,6 +17,5 @@ public class HomeSteps {
 	public void pesquisarProduto(String nomeProduto) {
 		HomePage homePage = new HomePage();
 		homePage.pesquisarProduto(nomeProduto);
-	}
-	
+	}	
 }

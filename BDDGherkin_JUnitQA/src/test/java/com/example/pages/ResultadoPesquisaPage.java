@@ -2,9 +2,6 @@ package com.example.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -13,13 +10,6 @@ import com.example.util.Hooks;
 import java.time.Duration;
 
 public class ResultadoPesquisaPage extends BasePage {
-
-    @FindBy(css = "[data-test='add-to-cart']")
-    protected WebElement botaoAdicionarAoCarrinho;
-
-    public ResultadoPesquisaPage() {
-        PageFactory.initElements(new AjaxElementLocatorFactory(Hooks.getDriver(), 10), this);
-    }
 
     public void adicionarProdutoAoCarrinho(String nomeProduto) {
     WebDriverWait wait = new WebDriverWait(Hooks.getDriver(), Duration.ofSeconds(15));
